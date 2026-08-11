@@ -64,7 +64,7 @@ logger = logging.getLogger("eryu")
 # ── Secret management ────────────────────────────────────────────────────────
 
 def _load_or_create_secret() -> str:
-    secret_file = HERE / ".secret"
+    secret_file = HERE / "data" / ".secret"
     try:
         if secret_file.exists():
             s = secret_file.read_text().strip()
