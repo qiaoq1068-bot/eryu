@@ -330,7 +330,11 @@ img { display: block; }
     color-mix(in srgb, var(--bg) 90%, transparent));
   transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.lyrics-view.hidden { transform: translateY(100%); pointer-events: none; }
+.lyrics-view.hidden {
+  transform: translateY(100%);
+  pointer-events: none;
+  visibility: hidden;
+}
 .ly-header {
   padding: 12px 16px; display: flex; align-items: center; justify-content: space-between;
   padding-top: calc(env(safe-area-inset-top, 0px) + 12px);
@@ -1372,6 +1376,7 @@ function openLyrics() {
   const lv = document.getElementById('lyrics-view');
   if (!lv) return;
   lv.classList.remove('hidden');
+  lv.style.visibility = 'visible';
   renderLyricsView();
   loadLyrics();
 }
@@ -1379,7 +1384,12 @@ function openLyrics() {
 function closeLyrics() {
   lyricsOpen = false;
   const lv = document.getElementById('lyrics-view');
-  if (lv) lv.classList.add('hidden');
+  if (lv) {
+    lv.classList.add('hidden');
+    lv.style.visibility = 'hidden';
+  }
+  // 关闭后刷新当前 tab，避免空白
+  renderTab();
 }
 
 function renderLyricsView() {
