@@ -586,6 +586,8 @@ async function loadAndPlay(song) {
 
   // 写入最近播放
   apiPost('/music/recent/add', { song }).catch(() => {});
+  // 上报当前正在播放
+  apiPost('/music/now', { song }).catch(() => {});
 
   try {
     const d = await api('/music/url?id=' + song.songId);
