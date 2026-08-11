@@ -1374,7 +1374,9 @@ function openLyrics() {
   const lv = document.getElementById('lyrics-view');
   if (!lv) return;
   lv.classList.remove('hidden');
+  lv.style.display = 'flex';
   lv.style.visibility = 'visible';
+  lv.style.pointerEvents = 'auto';
   renderLyricsView();
   loadLyrics();
 }
@@ -1386,7 +1388,7 @@ function closeLyrics() {
     lv.classList.add('hidden');
     lv.style.display = 'none';
   }
-  // 强制重新渲染当前页面
+  // 关闭后刷新当前 tab，避免空白
   const body = document.getElementById('tab-body');
   if (body) {
     if (currentTab === 'home') renderHome(body);
